@@ -1,0 +1,61 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  overflow-x: hidden;
+}
+
+/* Smooth section transitions */
+section {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.7s ease-out;
+}
+
+section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Add smooth section transitions */
+section {
+  position: relative;
+  isolation: isolate;
+}
+
+/* Add background fade effect between sections */
+.space-y-32 > * {
+  position: relative;
+  background-color: transparent;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Ensure proper spacing on mobile */
+@media (max-width: 768px) {
+  .space-y-32 > * {
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+  }
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
