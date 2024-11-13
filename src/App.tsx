@@ -6,8 +6,8 @@ import Hero from './components/Hero';
 import Services from './components/Services';
 import Features from './components/Features';
 import Contact from './components/Contact';
-import Team from './components/Team';
-import Tracking from './components/Tracking';
+//import Team from './components/Team';
+//import Tracking from './components/Tracking';
 
 import { Package, Truck, Plane } from 'lucide-react'; // Import icons
 
@@ -18,6 +18,22 @@ function App() {
   const [showArrow, setShowArrow] = useState(false);
   const [trackingNumber, setTrackingNumber] = useState('');
   const [trackingType, setTrackingType] = useState<'shipment' | 'container' | 'order'>('shipment');
+  const teamMembers: TeamMember[] = [
+    {
+      name: "Jane Doe",
+      role: "CEO",
+      image: "/team/emp1.jpg"
+    },
+    {
+      name: "John Doe",
+      role: "CTO",
+      image: "/team/emp3.jpg"
+    },{
+      name: "Don Juan",
+      role: "CFO",
+      image: "/team/emp4.png"
+    },
+  ];
 
   const trackingOptions = [
     { type: 'shipment', label: 'Shipment', icon: Package },
@@ -77,7 +93,7 @@ function App() {
         <img 
           src="logo\\LogoBanner.png" 
           alt="Background Logo"
-          className="w-full h-full object-cover opacity-10"
+          className="w-full h-full object-cover opacity-25"
         />
       </div>
 
@@ -167,7 +183,24 @@ function App() {
             <Features />
           </div>
           <div className="relative z-20">
-            <Team />
+            <div className="container mx-auto px-4">
+              <h2 className="text-4xl font-bold text-center mb-12">Our Team</h2>
+              <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8">
+                {teamMembers.map((member, index) => (
+                  <div key={index} className="bg-white rounded-lg shadow-lg overflow-hidden">
+                    <img 
+                      src={member.image} 
+                      alt={member.name}
+                      className="w-full h-64 object-cover"
+                    />
+                    <div className="p-4">
+                      <h3 className="text-xl font-semibold">{member.name}</h3>
+                      <p className="text-gray-600">{member.role}</p>
+                    </div>
+                  </div>
+              ))}
+            </div>
+          </div>
           </div>
           <div id="contact-section" className="scroll-mt-20 relative z-20">
             <Contact />

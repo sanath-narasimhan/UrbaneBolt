@@ -1,16 +1,16 @@
 import React from 'react';
 import { Package, Menu, X } from 'lucide-react';
-
+import tmLogo from '/logo/UeB.png';
 export default function Navbar() {
   const [isOpen, setIsOpen] = React.useState(false);
 
   return (
     <nav className="fixed w-full bg-[#1a1147] bg-opacity-95 text-white z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex items-center justify-between h-23">
           <div className="flex items-center">
             <div className="flex-shrink-0 flex items-center gap-2">
-              <Package className="h-8 w-8 text-[#4CAF50]" />
+            <img src={tmLogo} alt="TM Logo" className="h-8 w-8" /> {/*<Package className="h-8 w-8 text-[#4CAF50]" />*/}
               <span className="text-2xl font-bold">urbane<span className="text-[#4CAF50]">bolt</span></span>
             </div>
           </div>

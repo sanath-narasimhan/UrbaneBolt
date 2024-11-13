@@ -1,5 +1,6 @@
 import React from 'react';
 import { ArrowRight, Package } from 'lucide-react';
+import tmLogo from '/logo/UeB.png';
 
 export default function Hero() {
   const scrollToSection = (e: React.MouseEvent, sectionId: string) => {
@@ -22,7 +23,7 @@ export default function Hero() {
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div className="text-white">
             <div className="flex items-center gap-2 mb-6">
-              <Package className="h-10 w-10 text-[#4CAF50]" />
+            <img src={tmLogo} alt="TM Logo" className="h-8 w-8" /> {/*<Package className="h-10 w-10 text-[#4CAF50]" />*/}
               <span className="text-3xl font-bold">urbane<span className="text-[#4CAF50]">bolt</span></span>
             </div>
             <h1 className="text-5xl md:text-6xl font-bold mb-6">
