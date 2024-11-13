@@ -110,7 +110,7 @@ function App() {
       >
         <div className="relative w-full h-full flex items-center justify-center">
           <img 
-            src="logo\\LogoBanner.png" 
+            src="logo\\NewBannerTM.png" 
             alt="Company Logo"
             className={`w-full h-full object-cover transition-transform duration-1000
                        ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}
