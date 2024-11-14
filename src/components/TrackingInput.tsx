@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 
-import React, { useState } from 'react';
 import { Package, Truck, Plane } from 'lucide-react'; // Import icons
 
 type TrackingType = 'shipment' | 'container' | 'order';
