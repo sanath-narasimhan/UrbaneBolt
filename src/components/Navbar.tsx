@@ -1,17 +1,17 @@
 import React from 'react';
 import { Package, Menu, X } from 'lucide-react';
 import tmLogo from '/logo/UeB.jpg';
+
 export default function Navbar() {
   const [isOpen, setIsOpen] = React.useState(false);
 
   return (
-    <nav className="fixed w-full bg-[#1a1147] bg-opacity-95 text-white z-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-23">
+    <nav className="w-[98%] mx-auto my-2 bg-[#013046] bg-opacity-75 text-white rounded-2xl shadow-lg">
+      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10">
+        <div className="flex items-center justify-between h-16">
           <div className="flex items-center">
             <div className="flex-shrink-0 flex items-center gap-2">
-            <img src={tmLogo} alt="TM Logo" className="h-8 w-27" /> {/*<Package className="h-8 w-8 text-[#4CAF50]" />*/}
-              {/* <span className="text-2xl font-bold">urbane<span className="text-[#4CAF50]">bolt</span></span> */}
+              <img src={tmLogo} alt="TM Logo" className="h-8 w-27" />
             </div>
           </div>
           <div className="hidden md:block">

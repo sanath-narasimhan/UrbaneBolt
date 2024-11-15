@@ -1,6 +1,9 @@
 import React from 'react';
 import { ArrowRight, Package } from 'lucide-react';
+import { TypeAnimation } from 'react-type-animation';
 import tmLogo from '/logo/Logo.png';
+import Image from 'next/image';
+import mapImage from '/logo/IndiaMap.png';  // Adjust path as needed
 
 export default function Hero() {
   const scrollToSection = (e: React.MouseEvent, sectionId: string) => {
@@ -17,47 +20,70 @@ export default function Hero() {
   };
 
   return (
-    <div id="home" className="relative min-h-screen bg-gradient-to-br from-[#1a1147] via-[#1a1147] to-[#4CAF50] flex items-center">
-      <div className="absolute inset-0 bg-[#1a1147] opacity-90"></div>
+    <div id="home" className="relative min-h-screen bg-white flex items-center"> {/*}4CAF50  1a1147 */}
+      <div className="absolute inset-0 bg-white opacity-90"></div>
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div className="text-white">
-            <div className="flex items-center gap-2 mb-6">
-            <img src={tmLogo} alt="TM Logo" className="h-12 w-75" /> {/*<Package className="h-10 w-10 text-[#4CAF50]" />*/}
-            {/*<span className="text-3xl font-bold">urbane<span className="text-[#4CAF50]">bolt</span></span>*/}
+            <div className="flex flex-col items-center mb-6">
+              {/*<div className="w-full max-w-md">
+                <img src={tmLogo} alt="TM Logo" className="w-full h-auto" />
+              </div>*/}
+              
             </div>
-            <h1 className="text-5xl md:text-6xl font-bold mb-6">
-              Revolutionizing
-              <span className="text-[#4CAF50] block mt-2">Global Logistics</span>
+            <h1
+              className="mb-6 text-4xl font-bold md:text-5xl max-w-2xl text-[#1a1147]"
+              data-aos="zoom-y-out"
+              data-aos-delay={150}
+            >
+              Experts in Quick Commerce Logistics for <br className="max-lg:hidden " />
+              <TypeAnimation
+                sequence={[
+                  'Personal Care Brands',
+                  2000,
+                  'Beauty Brands',
+                  2000,
+                  'Petcare Brands',
+                  2000,
+                  'Electronic Brands',
+                  2000,
+                  'Fashon Brands',
+                  2000,
+                  'Wellness Brands',
+                  2000,
+                  'Cold-Chains Brands',
+                  2000,
+                  'F&B Brands',
+                  2000,
+                  'D2C Brands',
+                  2000,
+                ]}
+                wrapper="span"
+                speed={50}
+                repeat={Infinity}
+                className="inline-block text-green-600"
+              />
             </h1>
-            <p className="text-lg mb-8 text-gray-300">
-              Experience seamless shipping solutions with cutting-edge technology and unmatched reliability. Your trusted partner in modern logistics.
+
+            <p className="text-lg mb-8 text-black">
+              Urbanebolt, We deliver speed!
+              <br />
+              Launching same day delivery in Bengaluru & Hyderabad.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <a 
-                href="#contact-section"
-                onClick={(e) => scrollToSection(e, 'contact-section')}
-                className="bg-[#4CAF50] text-white px-8 py-4 rounded-lg font-medium hover:bg-[#45a049] transition-colors flex items-center justify-center gap-2 group"
-              >
-                Get Started 
-                <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
-              </a>
-              <a 
-                href="#tracking-section"
-                onClick={(e) => scrollToSection(e, 'tracking-section')}
-                className="border-2 border-white text-white px-8 py-4 rounded-lg font-medium hover:bg-white hover:text-[#1a1147] transition-colors text-center"
-              >
-                Track Shipment
-              </a>
-            </div>
+            
+            
           </div>
-          <div className="hidden md:block">
+          {/* */} 
+          <div className="hidden md:flex justify-end items-center">
             <img 
-              src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80"
-              alt="Modern Logistics Hub"
-              className="rounded-2xl shadow-2xl transform hover:scale-105 transition-transform duration-300"
+              src={mapImage}
+              alt="Indian map"
+              className="w-full max-w-[500px] h-auto rounded-3xl shadow-lg transform hover:scale-105 transition-transform duration-300"
             />
-          </div>
+          </div> 
+          {/* Add the new image container */}
+
+          
         </div>
       </div>
     </div>

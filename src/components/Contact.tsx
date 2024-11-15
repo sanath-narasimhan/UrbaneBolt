@@ -3,7 +3,7 @@ import { Mail, Phone, MapPin } from 'lucide-react';
 
 export default function Contact() {
   return (
-    <div id="contact" className="bg-[#1a1147] text-white py-24">
+    <div id="contact" className="bg-[#013046] bg-opacity-75 text-white py-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid md:grid-cols-2 gap-12">
           <div>
@@ -14,15 +14,11 @@ export default function Contact() {
             <div className="space-y-4">
               <div className="flex items-center gap-4">
                 <Mail className="text-[#4CAF50]" />
-                <span>contact@urbanebolt.com</span>
-              </div>
-              <div className="flex items-center gap-4">
-                <Phone className="text-[#4CAF50]" />
-                <span>+1 (555) 123-4567</span>
+                <span>info@urbanebolt.com</span>
               </div>
               <div className="flex items-center gap-4">
                 <MapPin className="text-[#4CAF50]" />
-                <span>123 Logistics Ave, Transport City, TC 12345</span>
+                <span>No 95 6th Cross CIL Layout RT Nagar Post Bangalore Karnataka 560032</span>
               </div>
             </div>
           </div>
