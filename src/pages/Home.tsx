@@ -18,6 +18,9 @@ interface TeamMember {
   image: string;
 }
 
+const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768; // Check if the device is mobile
+
+
 function Home() {
   const [showContent, setShowContent] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
@@ -259,36 +262,38 @@ function Home() {
 
           {/* Carousel Section */}
           <div className="relative w-full h-screen overflow-hidden">
-            {/*<div 
+          {isMobile ? (
+            <div 
               className="absolute inset-0 transition-all duration-200 ease-[cubic-bezier(0.4,0,0.2,1)] " 
               style={{ backgroundImage: `url(${slides[currentSlide].image})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
-            />*/}
+            />):(
 
-          <div style={columnStyles}>
-              {[...Array(NUMBER_OF_COLUMNS)].map((_, index) => (
-                <div
-                  key={index}
-                  className="h-full overflow-hidden"
-                >
+            <div style={columnStyles}>
+                {[...Array(NUMBER_OF_COLUMNS)].map((_, index) => (
                   <div
-                    className="h-full transition-all duration-1200 ease-in-out"
-                    style={getColumnTransform(index)}
+                    key={index}
+                    className="h-full overflow-hidden"
                   >
-                    {slides.map((slide, slideIndex) => (
-                      <div
-                        key={slideIndex}
-                        className="h-full"
-                        style={{
-                          backgroundImage: `url(${slide.image})`,
-                          backgroundSize: `${NUMBER_OF_COLUMNS * 100}% 100%`,
-                          backgroundPosition: `${-100 * index}% center`,
-                        }}
-                      />
-                    ))}
+                    <div
+                      className="h-full transition-all duration-1200 ease-in-out"
+                      style={getColumnTransform(index)}
+                    >
+                      {slides.map((slide, slideIndex) => (
+                        <div
+                          key={slideIndex}
+                          className="h-full"
+                          style={{
+                            backgroundImage: `url(${slide.image})`,
+                            backgroundSize: `${NUMBER_OF_COLUMNS * 100}% 100%`,
+                            backgroundPosition: `${-100 * index}% center`,
+                          }}
+                        />
+                      ))}
+                    </div>
                   </div>
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>)
+           }
 
 
             
