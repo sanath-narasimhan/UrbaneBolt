@@ -1,7 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Mail, Phone, MapPin } from 'lucide-react';
 
+const services = [
+  { title: 'Same Day Delivery', value: 'same_day_delivery' },
+  { title: 'Next Day Delivery', value: 'next_day_delivery' },
+  { title: 'Urban Cross Border', value: 'cross_border' },
+  { title: 'Urban Air & Ocean Freight', value: 'air_ocean_freight' },
+  { title: 'Urban Express Imports', value: 'express_imports' },
+  { title: 'Urban Store & Ship', value: 'store_and_ship' },
+];
+
 export default function Contact() {
+  const [selectedService, setSelectedService] = useState('');
+
+  const handleServiceChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedService(event.target.value);
+  };
+
   return (
     <div id="contact" className="bg-[#013046] bg-opacity-75 text-white py-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -24,6 +39,26 @@ export default function Contact() {
           </div>
           <div>
             <form className="space-y-4">
+              {/* Services Dropdown */}
+              <div>
+                <label htmlFor="services" className="block text-sm font-medium text-gray-300 mb-1">
+                  Select a Service
+                </label>
+                <select
+                  id="services"
+                  value={selectedService}
+                  onChange={handleServiceChange}
+                  className="w-full px-4 py-2 rounded-md bg-white/10 border border-white/20 focus:border-[#4CAF50] focus:outline-none focus:text-gray-800"
+                >
+                  <option value="" disabled>Select a service</option>
+                  {services.map((service) => (
+                    <option key={service.value} value={service.value}>
+                      {service.title}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
               <div>
                 <input
                   type="text"

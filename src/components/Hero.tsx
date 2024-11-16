@@ -23,16 +23,13 @@ export default function Hero() {
     <div id="home" className="relative min-h-screen bg-white flex items-center"> {/*}4CAF50  1a1147 */}
       <div className="absolute inset-0 bg-white opacity-90"></div>
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
-        <div className="grid md:grid-cols-2 gap-12 items-center">
+        <div className="grid md:grid-cols-2 gap-12 items-center justify-items-center">
           <div className="text-white">
-            <div className="flex flex-col items-center mb-6">
-              {/*<div className="w-full max-w-md">
-                <img src={tmLogo} alt="TM Logo" className="w-full h-auto" />
-              </div>*/}
+            <div className="flex flex-col items-center justify-items-center mb-6">
               
             </div>
             <h1
-              className="mb-6 text-4xl font-bold md:text-5xl max-w-2xl text-[#1a1147]"
+              className="mb-6 text-4xl font-bold md:text-5xl max-w-2xl text-[#1a1147] mx-auto text-center"
               data-aos="zoom-y-out"
               data-aos-delay={150}
             >
@@ -65,7 +62,7 @@ export default function Hero() {
               />
             </h1>
 
-            <p className="text-lg mb-8 text-black">
+            <p className="text-lg mb-8 text-black mx-auto text-center">
               Urbanebolt, We deliver speed!
               <br />
               Launching same day delivery in Bengaluru & Hyderabad.
