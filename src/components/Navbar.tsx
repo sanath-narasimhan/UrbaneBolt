@@ -5,6 +5,7 @@ import tmLogo from '/logo/UeB.jpg';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [showMobileServicesDropdown, setShowMobileServicesDropdown] = useState(false);
   const [showServicesDropdown, setShowServicesDropdown] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
@@ -118,16 +119,16 @@ export default function Navbar() {
             <div className="relative">
               <button
                 onClick={() => {
-                  setShowServicesDropdown(!showServicesDropdown);
-                  console.log(`Mobile Services Dropdown: ${showServicesDropdown ? 'Opened' : 'Closed'}`);
+                  setShowMobileServicesDropdown(!showMobileServicesDropdown);
+                  console.log(`Mobile Services Dropdown: ${showMobileServicesDropdown ? 'Opened' : 'Closed'}`);
                 }}
                 className="w-full text-left hover:text-[#4CAF50] block px-3 py-2 rounded-md text-base font-medium flex items-center justify-between"
               >
                 Services
-                <ChevronDown className={`h-4 w-4 transform transition-transform duration-200 ${showServicesDropdown ? 'rotate-180' : ''}`} />
+                <ChevronDown className={`h-4 w-4 transform transition-transform duration-200 ${showMobileServicesDropdown ? 'rotate-180' : ''}`} />
               </button>
               
-              {showServicesDropdown && (
+              {showMobileServicesDropdown && (
                 <div className="pl-4 space-y-1 bg-[#013046] rounded-md">
                   {services.map((service) => (
                     <button
@@ -135,7 +136,6 @@ export default function Navbar() {
                       onClick={() => {
                         console.log(`Mobile Service clicked: ${service.title}`);
                         handleServiceClick(service.index);
-                        setIsOpen(false);
                       }}
                       className="w-full text-left hover:text-[#4CAF50] block px-3 py-2 text-sm transition-colors duration-150"
                     >

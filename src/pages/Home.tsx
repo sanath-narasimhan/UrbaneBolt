@@ -30,16 +30,6 @@ function Home() {
   const [trackingType, setTrackingType] = useState<'shipment' | 'container' | 'order'>('shipment');
   const [activeTab, setActiveTab] = useState('shipment');
 
-  const NUMBER_OF_COLUMNS = 12;
-  const columnStyles = {
-    position: 'absolute' as const,
-    inset: 0,
-    display: 'grid',
-    gridTemplateColumns: `repeat(${NUMBER_OF_COLUMNS}, 1fr)`,
-    width: '100%',
-    height: '100%',
-  };
-
   const teamMembers: TeamMember[] = [
     {
       name: "",
@@ -87,17 +77,6 @@ function Home() {
       label: 'Order Number'
     }
   };
-
-    // Add this function to calculate the transform for each column
-    const getColumnTransform = (index: number) => {
-      return {
-        transform: `translateY(${currentSlide * -100}%)`,
-        transitionDelay: `${index * 50}ms`,
-        backgroundImage: `url(${slides[currentSlide].image})`,
-        backgroundSize: `${NUMBER_OF_COLUMNS * 100}% 100%`,
-        backgroundPosition: `${-100 * index}% center`,
-      };
-    };
 
   const getPlaceholder = () => {
     switch(activeTab) {
@@ -255,51 +234,22 @@ function Home() {
 
           {/* Carousel Section */}
           <div className="relative w-full h-screen overflow-hidden">
-            {/*{isMobile ? (
-              <div 
-                className="absolute inset-0 transition-all duration-10 ease-in-out" 
-                style={{ backgroundImage: `url(${slides[currentSlide].image})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
-              />):(
-              
-              <div style={columnStyles}>
-                  {[...Array(NUMBER_OF_COLUMNS)].map((_, index) => (
-                    <div
-                      key={index}
-                      className="h-full overflow-hidden"
-                    >
-                      <div
-                        className="h-full transition-all duration-1200 ease-in-out"
-                        style={getColumnTransform(index)}
-                      >
-                        {slides.map((slide, slideIndex) => (
-                          <div
-                            key={slideIndex}
-                            className="h-full"
-                            style={{
-                              backgroundImage: `url(${slide.image})`,
-                              backgroundSize: `${NUMBER_OF_COLUMNS * 100}% 100%`,
-                              backgroundPosition: `${-100 * index}% center`,
-                            }}
-                          />
-                        ))}
-                      </div>
-                    </div>
-                  ))}
-                </div>)
-            }*/}
             <div 
-                className="absolute inset-0 transition-all duration-500 ease-in-out" 
-                style={{ backgroundImage: `url(${slides[currentSlide].image})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
-              />
+              className="absolute inset-0 transition-all duration-700 ease-in-out" 
+              style={{ 
+                backgroundImage: `url(${slides[currentSlide].image})`, 
+                backgroundSize: 'cover', 
+                backgroundPosition: 'center' 
+              }}
+            />
 
-
-            
+            {/* Navigation arrows */}
             <div className="absolute top-1/2 left-0 transform -translate-y-1/2 z-10">
               <button 
                 onClick={handlePrevSlide} 
                 className="bg-white bg-opacity-10 p-4 rounded-full shadow-lg hover:bg-opacity-100 transition duration-300 flex items-center justify-center"
               >
-                <ArrowRight className="h-6 w-6 rotate-180" /> {/* Left Arrow */}
+                <ArrowRight className="h-6 w-6 rotate-180" />
               </button>
             </div>
             <div className="absolute top-1/2 right-0 transform -translate-y-1/2 z-10">
@@ -307,17 +257,17 @@ function Home() {
                 onClick={handleNextSlide} 
                 className="bg-white bg-opacity-10 p-4 rounded-full shadow-lg hover:bg-opacity-100 transition duration-300 flex items-center justify-center"
               >
-                <ArrowRight className="h-6 w-6 " /> {/* Right Arrow */}
+                <ArrowRight className="h-6 w-6 " />
               </button>
             </div>
 
-            <div className="absolute top-10 md:top-2 left-0 right-0 p-4 text-white bg-white bg-opacity-25">
-              <div className="flex flex-col items-center md:items-start">
+            <div className="absolute top-24 md:top-42 left-0 right-0 p-4 text-white bg-black bg-opacity-25">
+              <div className="flex flex-col items-center md:items-start md:pl-20 left-40">
                 {/* Logo Image */}
                 <img 
                   src="/logo/logoBB.png" // Replace with the actual path to your logo
                   alt="Logo"
-                  className="w-64 h-auto mb-4" // Adjust width as needed
+                  className="w-64 h-auto mb-4 bg-white bg-opacity-45 " // Adjust width as needed
                 />
 
                 <h4 className="text-2xl md:text-3xl lg:text-4xl font-semibold mb-2 text-center md:text-left">
@@ -331,17 +281,17 @@ function Home() {
           </div>
 
              {/* Shipment Tracker */}
-            <div className="absolute bottom-4 md:bottom-1 left-1/2 transform -translate-x-1/2 w-[95%] md:w-[80%] max-w-3xl bg-[#] p-2 md:p-4 rounded-lg z-10">
+            <div className="absolute bottom-14 md:bottom-10 left-1/2 transform -translate-x-1/2 w-[95%] md:w-[80%] max-w-3xl bg-[#] p-2 md:p-4 rounded-lg z-10">
               {/* Header and Tabs */}
               <div className="mb-3 md:mb-4">
-                <div className="flex flex-wrap gap-2 md:space-x-1">
+                <div className="flex justify-between md:justify-start md:space-x-1">
                   {['shipment', 'mobile', 'order'].map((tab) => {
                     const TabIcon = tabConfig[tab].icon;
                     return (
                       <button
                         key={tab}
                         onClick={() => setActiveTab(tab)}
-                        className={`px-2 md:px-3 py-1 md:py-1.5 rounded-lg font-medium capitalize transition-colors duration-200 flex items-center text-sm md:text-base ${
+                        className={`px-2 md:px-3 py-1 md:py-1.5 rounded-lg font-medium capitalize transition-colors duration-200 flex items-center text-xs md:text-base ${
                           activeTab === tab
                             ? `${tabConfig[tab].color} text-white`
                             : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
