@@ -19,8 +19,8 @@ export default function Navbar() {
   ];
 
   const handleServiceClick = (serviceIndex: number) => {
-    setIsOpen(false);
-    setShowServicesDropdown(false);
+    setIsOpen(false); // Close mobile menu
+    setShowServicesDropdown(false); // Close dropdown
     navigate('/services', { 
       state: { activeTab: serviceIndex },
       replace: true
@@ -57,7 +57,9 @@ export default function Navbar() {
               {/* Services Dropdown */}
               <div className="relative" ref={dropdownRef}>
                 <button
-                  onClick={() => setShowServicesDropdown(!showServicesDropdown)}
+                  onClick={() => {setShowServicesDropdown(!showServicesDropdown);
+                    console.log(`Mobile Services Dropdown: ${showServicesDropdown ? 'Opened' : 'Closed'}`);}
+                  }
                   className="hover:text-[#4CAF50] px-3 py-2 rounded-md text-sm font-medium flex items-center gap-1"
                 >
                   Services
@@ -115,7 +117,10 @@ export default function Navbar() {
             {/* Mobile Services Section */}
             <div className="relative">
               <button
-                onClick={() => setShowServicesDropdown(!showServicesDropdown)}
+                onClick={() => {
+                  setShowServicesDropdown(!showServicesDropdown);
+                  console.log(`Mobile Services Dropdown: ${showServicesDropdown ? 'Opened' : 'Closed'}`);
+                }}
                 className="w-full text-left hover:text-[#4CAF50] block px-3 py-2 rounded-md text-base font-medium flex items-center justify-between"
               >
                 Services
@@ -127,7 +132,11 @@ export default function Navbar() {
                   {services.map((service) => (
                     <button
                       key={service.index}
-                      onClick={() => handleServiceClick(service.index)}
+                      onClick={() => {
+                        console.log(`Mobile Service clicked: ${service.title}`);
+                        handleServiceClick(service.index);
+                        setIsOpen(false);
+                      }}
                       className="w-full text-left hover:text-[#4CAF50] block px-3 py-2 text-sm transition-colors duration-150"
                     >
                       {service.title}

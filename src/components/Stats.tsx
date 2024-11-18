@@ -8,8 +8,16 @@ import {
 
 export default function Stats() {
   return (
-    <section className="relative py-12 md:py-0" style={{ minHeight: '50vh', height: 'auto', md: { height: '30vh' }, backgroundColor: '#013046' }}>
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 h-full">
+    
+    <section className="relative py-12 md:py-0 bg-[#013046] bg-opacity-75" style={{ minHeight: '50vh', height: 'auto', md: { height: '30vh' }}}>
+      
+      
+     
+      
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 h-full pt-16">
+      
+      
+
         <div className="flex items-center justify-center h-full">
           {/* Stats grid */}
           <div className="grid grid-cols-2 gap-6 md:gap-8 lg:grid-cols-5">

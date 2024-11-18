@@ -136,7 +136,7 @@ export default function Services() {
       </div>
       
       {/* Hero Section with Background Image */}
-      <div className="relative h-[25vh] flex items-end justify-center pb-4">
+      <div className="relative h-[25vh] flex items-end justify-center pb-4 z-10">
         <div className="absolute inset-0 z-0">
           <img
             src="/images/banner.webp"
@@ -149,8 +149,10 @@ export default function Services() {
         </h1>
       </div>
 
+      
+
       {/* Services Tabs Section - added margin-top */}
-      <div className="w-full bg-gray-100 mt-8">
+      <div className="w-full bg-gray-100 mt-8 z-10 bg-white">
         {/* Tabs Navigation */}
         <div className="w-full overflow-x-auto">
           <div className="flex min-w-full">
@@ -197,10 +199,11 @@ export default function Services() {
           </div>
         </div>
       </div>
+      
       <div id="contact-section" className="scroll-mt-20 relative z-20">
             <Stats />
             <Contact />
-          </div>
+       </div>
     </div>
   );
 }

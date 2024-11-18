@@ -155,37 +155,31 @@ function Home() {
   const slides = [
 
     {
-      title: "urbanebolt offers",
       service: "Same Day Delivery",
       description: "On time, Every Time",
       image: "/carousel/sdd.jpg"
     },
     {
-      title: "urbanebolt offers",
       service: "Next Day Delivery",
       description: "Tomrrow's delivery, Today's promise",
       image: "/carousel/ndd.jpg"
     },
     {
-      title: "urbanebolt offers",
       service: "Urban Cross Border",
       description: "Shop the world, delivered to your door",
       image: "/carousel/cargoPlane.jpg"
     },
     {
-      title: "urbanebolt offers",
       service: "Urban Air and Ocean Freight",
       description: "Global reach, Local Expertise",
       image: "/carousel/ship.jpg"
     },
     {
-      title: "urbanebolt offers",
       service: "Urban Express Imports",
       description: "Global Sourcing, Local Delivery",
       image: "/carousel/fly.jpg"
     },
     {
-      title: "urbanebolt offers",
       service: "Urban Storage",
       description: "A home for your cargo",
       image: "/carousel/warehouse.jpg"
@@ -199,7 +193,7 @@ function Home() {
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
-    }, 8000);
+    }, 5000);
 
     return () => clearInterval(timer);
   }, []);
@@ -223,8 +217,7 @@ function Home() {
       </div>
 
       {/* Navbar */}
-      <div className={`fixed top-0 left-0 w-full z-[90] transition-all duration-500
-                      ${showContent ? 'translate-y-0' : '-translate-y-full'}`}>
+      <div className={`fixed top-0 left-0 w-full z-[90] transition-all duration-500`}>
         <div className="container mx-auto px-4">
           <Navbar />
         </div>
@@ -243,7 +236,7 @@ function Home() {
       {/* Initial Banner */}
       <div 
         className={`fixed top-0 left-0 w-full h-screen bg-white z-50 
-                    transition-all duration-700 ease-in-out
+                    transition-all duration-10 ease-in-out
                     ${isLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}
         style={{ 
           opacity: showContent ? 0 : 1, 
@@ -262,42 +255,46 @@ function Home() {
 
           {/* Carousel Section */}
           <div className="relative w-full h-screen overflow-hidden">
-          {isMobile ? (
-            <div 
-              className="absolute inset-0 transition-all duration-200 ease-[cubic-bezier(0.4,0,0.2,1)] " 
-              style={{ backgroundImage: `url(${slides[currentSlide].image})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
-            />):(
-
-            <div style={columnStyles}>
-                {[...Array(NUMBER_OF_COLUMNS)].map((_, index) => (
-                  <div
-                    key={index}
-                    className="h-full overflow-hidden"
-                  >
+            {/*{isMobile ? (
+              <div 
+                className="absolute inset-0 transition-all duration-10 ease-in-out" 
+                style={{ backgroundImage: `url(${slides[currentSlide].image})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
+              />):(
+              
+              <div style={columnStyles}>
+                  {[...Array(NUMBER_OF_COLUMNS)].map((_, index) => (
                     <div
-                      className="h-full transition-all duration-1200 ease-in-out"
-                      style={getColumnTransform(index)}
+                      key={index}
+                      className="h-full overflow-hidden"
                     >
-                      {slides.map((slide, slideIndex) => (
-                        <div
-                          key={slideIndex}
-                          className="h-full"
-                          style={{
-                            backgroundImage: `url(${slide.image})`,
-                            backgroundSize: `${NUMBER_OF_COLUMNS * 100}% 100%`,
-                            backgroundPosition: `${-100 * index}% center`,
-                          }}
-                        />
-                      ))}
+                      <div
+                        className="h-full transition-all duration-1200 ease-in-out"
+                        style={getColumnTransform(index)}
+                      >
+                        {slides.map((slide, slideIndex) => (
+                          <div
+                            key={slideIndex}
+                            className="h-full"
+                            style={{
+                              backgroundImage: `url(${slide.image})`,
+                              backgroundSize: `${NUMBER_OF_COLUMNS * 100}% 100%`,
+                              backgroundPosition: `${-100 * index}% center`,
+                            }}
+                          />
+                        ))}
+                      </div>
                     </div>
-                  </div>
-                ))}
-              </div>)
-           }
+                  ))}
+                </div>)
+            }*/}
+            <div 
+                className="absolute inset-0 transition-all duration-500 ease-in-out" 
+                style={{ backgroundImage: `url(${slides[currentSlide].image})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
+              />
 
 
             
-            <div className="absolute top-1/2 left-0 transform -translate-y-1/2">
+            <div className="absolute top-1/2 left-0 transform -translate-y-1/2 z-10">
               <button 
                 onClick={handlePrevSlide} 
                 className="bg-white bg-opacity-10 p-4 rounded-full shadow-lg hover:bg-opacity-100 transition duration-300 flex items-center justify-center"
@@ -305,7 +302,7 @@ function Home() {
                 <ArrowRight className="h-6 w-6 rotate-180" /> {/* Left Arrow */}
               </button>
             </div>
-            <div className="absolute top-1/2 right-0 transform -translate-y-1/2">
+            <div className="absolute top-1/2 right-0 transform -translate-y-1/2 z-10">
               <button 
                 onClick={handleNextSlide} 
                 className="bg-white bg-opacity-10 p-4 rounded-full shadow-lg hover:bg-opacity-100 transition duration-300 flex items-center justify-center"
@@ -314,22 +311,27 @@ function Home() {
               </button>
             </div>
 
-            <div className="absolute top-10 md:top-20 left-0 right-0 p-4 text-white bg-white bg-opacity-10">
-              <h2 className="text-4xl md:text-6xl lg:text-8xl font-bold text-center md:text-left">
-                <span style={{ color: '#150958' }}>urban</span>
-                <span style={{ color: '#40AC49' }}>ebolt</span>
-              </h2>
-              <h4 className="text-2xl md:text-3xl lg:text-4xl font-semibold mb-2 text-center md:text-left">
-                {slides[currentSlide].service}
-              </h4>
-              <p className="mb-4 md:mb-8 text-base md:text-lg max-w-full text-center md:text-left">
-                {slides[currentSlide].description}
-              </p>
+            <div className="absolute top-10 md:top-2 left-0 right-0 p-4 text-white bg-white bg-opacity-25">
+              <div className="flex flex-col items-center md:items-start">
+                {/* Logo Image */}
+                <img 
+                  src="/logo/logoBB.png" // Replace with the actual path to your logo
+                  alt="Logo"
+                  className="w-64 h-auto mb-4" // Adjust width as needed
+                />
+
+                <h4 className="text-2xl md:text-3xl lg:text-4xl font-semibold mb-2 text-center md:text-left">
+                  {slides[currentSlide].service}
+                </h4>
+                <p className="mb-4 md:mb-8 text-base md:text-lg max-w-full text-center md:text-left">
+                  {slides[currentSlide].description}
+                </p>
+              </div>
             </div>
           </div>
 
              {/* Shipment Tracker */}
-            <div className="absolute bottom-4 md:bottom-12 left-1/2 transform -translate-x-1/2 w-[95%] md:w-[80%] max-w-3xl bg-[#] p-2 md:p-4 rounded-lg z-10">
+            <div className="absolute bottom-4 md:bottom-1 left-1/2 transform -translate-x-1/2 w-[95%] md:w-[80%] max-w-3xl bg-[#] p-2 md:p-4 rounded-lg z-10">
               {/* Header and Tabs */}
               <div className="mb-3 md:mb-4">
                 <div className="flex flex-wrap gap-2 md:space-x-1">
@@ -345,8 +347,8 @@ function Home() {
                             : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                         }`}
                       >
-                        <TabIcon className="h-3 w-3 md:h-4 md:w-4" />
-                        <span className="ml-1 hidden xs:inline">{tabConfig[tab].label}</span>
+                        <TabIcon className="h-3 w-3 md:h-4 md:w-4 hidden md:inline" />
+                        <span className="ml-1">{tabConfig[tab].label}</span>
                       </button>
                     );
                   })}
@@ -380,6 +382,7 @@ function Home() {
       
         
       </div>
+
       {/* Main Content */}
       <div className={`relative z-10 transition-all duration-700 
                       ${showContent ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'}`}
