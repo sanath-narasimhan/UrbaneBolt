@@ -23,7 +23,7 @@ const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768; // C
 
 
 function Home() {
-  const [showContent, setShowContent] = useState(false);
+  
   const [scrollProgress, setScrollProgress] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
   const [showArrow, setShowArrow] = useState(false);
@@ -60,14 +60,14 @@ function Home() {
 
   const tabConfig = {
     shipment: {
-      color: 'bg-orange-500',
-      hoverColor: 'hover:bg-orange-400',
+      color: 'bg-green-600',
+      hoverColor: 'hover:bg-green-600',
       icon: TruckIcon, 
       label: 'AWB Number'
     },
     mobile: {
-      color: 'bg-blue-400',
-      hoverColor: 'hover:bg-blue-300',
+      color: 'bg-green-600',
+      hoverColor: 'hover:bg-green-600',
       icon: DevicePhoneMobileIcon, 
       label: 'Mobile Number'
     },
@@ -97,24 +97,21 @@ function Home() {
     setTimeout(() => setIsLoaded(true), 500);
     setTimeout(() => setShowArrow(true), 1500);
 
-
     const handleScroll = () => {
-      // Show content after small scroll
-      if (window.scrollY > 100) {
-        setShowContent(true);
-      } else {
-        setShowContent(false);
-      }
+      const scrollTop = window.scrollY; // Current scroll position
+      const windowHeight = window.innerHeight; // Height of the viewport
+      const documentHeight = document.documentElement.scrollHeight; // Total height of the document
+      const totalScrollableHeight = documentHeight - windowHeight; // Total scrollable height
 
-      // Progress bar
-      const windowHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const scrolled = (window.scrollY / windowHeight) * 100;
-      setScrollProgress(scrolled);
+      const progress = (scrollTop / totalScrollableHeight) * 100; // Calculate scroll progress as a percentage
+      setScrollProgress(progress); // Update scroll progress state
     };
 
+    window.addEventListener('scroll', handleScroll); // Add scroll event listener
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll); // Cleanup event listener on unmount
+    };
   }, []);
 
   const scrollToContent = () => {
@@ -204,24 +201,22 @@ function Home() {
       </div>
 
       {/* Background Banner (stays fixed) */}
-      <div className="fixed top-0 left-0 w-full h-screen z-0">
+      <div className=" fixed top-0 left-0 w-full h-full z-0">
         <img 
-          src="logo\\Logo.png" 
+          src="logo\\LogoBanner.png" 
           alt="Background Logo"
-          className="w-full h-full object-cover opacity-45"
+          className="w-full  object-cover opacity-45"
         />
         
       </div>
 
       {/* Initial Banner */}
       <div 
-        className={`fixed top-0 left-0 w-full h-screen bg-white z-50 
+        className={` top-0 left-0 w-full h-full bg-white z-50 
                     transition-all duration-10 ease-in-out
                     ${isLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}
         style={{ 
-          opacity: showContent ? 0 : 1, 
-          pointerEvents: showContent ? 'none' : 'auto',
-          transform: showContent ? 'translateY(-100%)' : 'translateY(0)',
+         
         }}
       >
         <div className="relative w-full h-full flex items-center justify-center">
@@ -262,27 +257,30 @@ function Home() {
               </button>
             </div>
 
-            <div className="absolute top-24 md:top-42 left-0 right-0 p-4 text-white bg-black bg-opacity-25">
-              <div className="flex flex-col items-center md:items-start md:pl-20 left-40">
+            <div className="absolute top-24 md:top-42 left-0 right-0 p-4 text-white bg-white bg-opacity-25">
+              <div className="flex flex-col items-center md:items-start md:pl-20 left-40 ">
                 {/* Logo Image */}
+                
                 <img 
                   src="/logo/logoBB.png" // Replace with the actual path to your logo
                   alt="Logo"
-                  className="w-64 h-auto mb-4 bg-white bg-opacity-45 " // Adjust width as needed
+                  className="w-64 h-auto mb-0 " // Adjust width as needed
                 />
-
-                <h4 className="text-2xl md:text-3xl lg:text-4xl font-semibold mb-2 text-center md:text-left">
+                
+                
+                <h4 className="text-2xl md:text-3xl lg:text-4xl font-semibold mb-0 text-center md:text-left">
                   {slides[currentSlide].service}
                 </h4>
                 <p className="mb-4 md:mb-8 text-base md:text-lg max-w-full text-center md:text-left">
                   {slides[currentSlide].description}
                 </p>
+                
               </div>
             </div>
           </div>
 
              {/* Shipment Tracker */}
-            <div className="absolute bottom-14 md:bottom-10 left-1/2 transform -translate-x-1/2 w-[95%] md:w-[80%] max-w-3xl bg-[#] p-2 md:p-4 rounded-lg z-10">
+            <div id="tracking" className="absolute bottom-14 md:bottom-10 left-1/2 transform -translate-x-1/2 w-[95%] md:w-[80%] max-w-3xl bg-[#] p-2 md:p-4 rounded-lg z-10">
               {/* Header and Tabs */}
               <div className="mb-3 md:mb-4">
                 <div className="flex justify-between md:justify-start md:space-x-1">
@@ -335,20 +333,19 @@ function Home() {
       </div>
 
       {/* Main Content */}
-      <div className={`relative z-10 transition-all duration-700 
-                      ${showContent ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'}`}
+      <div className={`relative z-10 transition-all opacity-100 translate-y-0 `}
         style={{ 
-          marginTop: showContent ? '0' : '100vh',
+          marginTop:  '1vh',
           background: 'transparent'
         }}
       >
-        <div className="pt-16 space-y-32">
+        <div className="pt-10 space-y-12 ">
           <div className="relative z-20">
           <div className="w-full h-32 bg-gradient-to-b from-transparent to-white/50" />
             <Hero />
           </div>
 
-          <div className="relative z-[9999] bg-white">
+          <div className="relative z-20 bg-white bg-opacity-10 ">
             <div className="visible">
               <FeaturesPlanet />
             </div>
@@ -360,7 +357,6 @@ function Home() {
           </div>
           <div className="relative z-20">
             <Features />
-            <Integrations />
           </div>
 
           {/* Our team 
@@ -388,7 +384,7 @@ function Home() {
 
     
           
-          <div id="contact-section" className="scroll-mt-20 relative z-20">
+          <div id="contact" className="scroll-mt-20 relative z-20">
             <Stats />
             <Contact />
           </div>

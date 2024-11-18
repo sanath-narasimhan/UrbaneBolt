@@ -26,7 +26,7 @@ const features = [
 
 export default function Features() {
   return (
-    <div className="py-20 bg-white">
+    <div className="py-20 bg-white bg-opacity-85">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16 bg-white bg-opacity-20">
           <h2 className="text-4xl font-bold text-[#1a1147] mb-4 ">Why Choose Us</h2>

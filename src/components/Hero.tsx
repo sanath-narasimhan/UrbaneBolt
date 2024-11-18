@@ -20,8 +20,8 @@ export default function Hero() {
   };
 
   return (
-    <div id="home" className="relative min-h-screen bg-white flex items-center flex-col">
-      <div className="absolute inset-0 bg-white opacity-90"></div>
+    <div id="home" className="relative min-h-screen bg-white bg-opacity-5 flex items-center flex-col">
+      <div className="absolute inset-0 bg-white  opacity-90"></div>
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
         <div className="grid md:grid-cols-2 gap-12 items-center justify-items-center">
           <div className="text-white">

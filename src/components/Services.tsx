@@ -6,7 +6,7 @@ const services = [
   {
     icon: <Building className="h-8 w-8" />,
     title: 'Brand Warehouse',
-    description: 'Products are carefully picked and packed from our partner brand warehouses, ensuring quality and authenticity.'
+    description: 'Products are carefully picked from our partner brand warehouses, ensuring quality and authenticity.'
   },
   {
     icon: <CircleStackIcon className="h-8 w-8" />,
@@ -27,7 +27,7 @@ const services = [
 
 export default function Services() {
   return (
-    <div id="services" className="py-24 bg-[#013046]">
+    <div id="services" className="py-24 bg-[#013046] bg-opacity-75">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16 ">
           <h2 className="text-4xl font-bold text-white mb-4">Seamless Delivery Journey</h2>

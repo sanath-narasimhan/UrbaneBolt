@@ -9,7 +9,7 @@ import { GlobeAsiaAustraliaIcon, ClockIcon, TruckIcon, RocketLaunchIcon, PaperAi
 
 export default function FeaturesPlanet() {
   return (
-    <section className="relative z-[9999] bg-white py-12 pt-40 overflow-hidden">
+    <section className="relative z-[9999] bg-white bg-opacity-5 py-12 pt-40 overflow-hidden">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <div className="py-8 md:py-20">
           {/* Section header */}
@@ -31,16 +31,16 @@ export default function FeaturesPlanet() {
                 {/* Box 1 - Ground Freight */}
                 <div className="min-w-[250px] bg-white hover:bg-[#1a1147] hover:border-[#1a1147] rounded-lg p-4 shadow-lg border border-gray-200 transition-colors duration-300 group cursor-pointer">
                   <div className="flex items-center gap-2 mb-2">
-                    <TruckIcon className="w-6 h-6 text-blue-600 group-hover:text-white" />
+                    <TruckIcon className="w-6 h-6 text-green-600 group-hover:text-white" />
                     <h4 className="text-lg font-bold text-gray-900 group-hover:text-white">Same Day Delivery</h4>
                   </div>
-                  <p className="text-sm text-gray-600 group-hover:text-white">Efficient road transportation with real-time tracking and nationwide coverage.</p>
+                  <p className="text-sm text-gray-600 group-hover:text-white">Efficient road transportation with real-time tracking and coverage.</p>
                 </div>
 
                 {/* Box 2 - Ocean Freight */}
                 <div className="min-w-[250px] bg-white hover:bg-[#1a1147] hover:border-[#1a1147] rounded-lg p-4 shadow-lg border border-gray-200 transition-colors duration-300 group cursor-pointer">
                   <div className="flex items-center gap-2 mb-2">
-                    <ClockIcon className="w-6 h-6 text-blue-600 group-hover:text-white" />
+                    <ClockIcon className="w-6 h-6 text-green-600 group-hover:text-white" />
                     <h4 className="text-lg font-bold text-gray-900 group-hover:text-white">Next Day Delivery</h4>
                   </div>
                   <p className="text-sm text-gray-600 group-hover:text-white">Cost-effective sea freight solutions for international shipping needs.</p>
@@ -49,16 +49,16 @@ export default function FeaturesPlanet() {
                 {/* Box 3 - Air Freight */}
                 <div className="min-w-[250px] bg-white hover:bg-[#1a1147] hover:border-[#1a1147] rounded-lg p-4 shadow-lg border border-gray-200 transition-colors duration-300 group cursor-pointer">
                   <div className="flex items-center gap-2 mb-2">
-                    <GlobeAsiaAustraliaIcon className="w-6 h-6 text-blue-600 group-hover:text-white" />
+                    <GlobeAsiaAustraliaIcon className="w-6 h-6 text-green-600 group-hover:text-white" />
                     <h4 className="text-lg font-bold text-gray-900 group-hover:text-white">Urban Cross Border</h4>
                   </div>
-                  <p className="text-sm text-gray-600 group-hover:text-white">Express air cargo services for time-sensitive deliveries worldwide.</p>
+                  <p className="text-sm text-gray-600 group-hover:text-white">Express air cargo services for time-sensitive deliveries.</p>
                 </div>
 
                 {/* Box 4 - Warehousing */}
                 <div className="min-w-[250px] bg-white hover:bg-[#1a1147] hover:border-[#1a1147] rounded-lg p-4 shadow-lg border border-gray-200 transition-colors duration-300 group cursor-pointer">
                   <div className="flex items-center gap-2 mb-2">
-                    <PaperAirplaneIcon className="w-6 h-6 text-blue-600 group-hover:text-white" />
+                    <PaperAirplaneIcon className="w-6 h-6 text-green-600 group-hover:text-white" />
                     <h4 className="text-lg font-bold text-gray-900 group-hover:text-white">Urban Air & Ocean Freight</h4>
                   </div>
                   <p className="text-sm text-gray-600 group-hover:text-white">State-of-the-art storage facilities with inventory management.</p>
@@ -67,7 +67,7 @@ export default function FeaturesPlanet() {
                 {/* Box 5 - Custom Clearance */}
                 <div className="min-w-[250px] bg-white hover:bg-[#1a1147] hover:border-[#1a1147] rounded-lg p-4 shadow-lg border border-gray-200 transition-colors duration-300 group cursor-pointer">
                   <div className="flex items-center gap-2 mb-2">
-                    <ArrowPathIcon className="w-6 h-6 text-blue-600 group-hover:text-white" />
+                    <ArrowPathIcon className="w-6 h-6 text-green-600 group-hover:text-white" />
                     <h4 className="text-lg font-bold text-gray-900 group-hover:text-white">Urban Express Import</h4>
                   </div>
                   <p className="text-sm text-gray-600 group-hover:text-white">Seamless customs documentation and clearance services.</p>
@@ -76,7 +76,7 @@ export default function FeaturesPlanet() {
                 {/* Box 6 - Supply Chain */}
                 <div className="min-w-[250px] bg-white hover:bg-[#1a1147] hover:border-[#1a1147] rounded-lg p-4 shadow-lg border border-gray-200 transition-colors duration-300 group cursor-pointer">
                   <div className="flex items-center gap-2 mb-2">
-                    <BuildingOffice2Icon className="w-6 h-6 text-blue-600 group-hover:text-white" />
+                    <BuildingOffice2Icon className="w-6 h-6 text-green-600 group-hover:text-white" />
                     <h4 className="text-lg font-bold text-gray-900 group-hover:text-white">Urban Store & Ship</h4>
                   </div>
                   <p className="text-sm text-gray-600 group-hover:text-white">End-to-end supply chain optimization and management.</p>
@@ -87,7 +87,7 @@ export default function FeaturesPlanet() {
                 {/* Box 1 - Ground Freight */}
                 <div className="min-w-[250px] bg-white hover:bg-[#1a1147] hover:border-[#1a1147] rounded-lg p-4 shadow-lg border border-gray-200 transition-colors duration-300 group cursor-pointer">
                   <div className="flex items-center gap-2 mb-2">
-                    <TruckIcon className="w-6 h-6 text-blue-600 group-hover:text-white" />
+                    <TruckIcon className="w-6 h-6 text-green-600 group-hover:text-white" />
                     <h4 className="text-lg font-bold text-gray-900 group-hover:text-white">Same Day Delivery</h4>
                   </div>
                   <p className="text-sm text-gray-600 group-hover:text-white">Efficient road transportation with real-time tracking and nationwide coverage.</p>
@@ -96,7 +96,7 @@ export default function FeaturesPlanet() {
                 {/* Box 2 - Ocean Freight */}
                 <div className="min-w-[250px] bg-white hover:bg-[#1a1147] hover:border-[#1a1147] rounded-lg p-4 shadow-lg border border-gray-200 transition-colors duration-300 group cursor-pointer">
                   <div className="flex items-center gap-2 mb-2">
-                    <ClockIcon className="w-6 h-6 text-blue-600 group-hover:text-white" />
+                    <ClockIcon className="w-6 h-6 text-green-600 group-hover:text-white" />
                     <h4 className="text-lg font-bold text-gray-900 group-hover:text-white">Next Day Delivery</h4>
                   </div>
                   <p className="text-sm text-gray-600 group-hover:text-white">Cost-effective sea freight solutions for international shipping needs.</p>
@@ -105,7 +105,7 @@ export default function FeaturesPlanet() {
                 {/* Box 3 - Air Freight */}
                 <div className="min-w-[250px] bg-white hover:bg-[#1a1147] hover:border-[#1a1147] rounded-lg p-4 shadow-lg border border-gray-200 transition-colors duration-300 group cursor-pointer">
                   <div className="flex items-center gap-2 mb-2">
-                    <GlobeAsiaAustraliaIcon className="w-6 h-6 text-blue-600 group-hover:text-white" />
+                    <GlobeAsiaAustraliaIcon className="w-6 h-6 text-green-600 group-hover:text-white" />
                     <h4 className="text-lg font-bold text-gray-900 group-hover:text-white">Urban Cross Border</h4>
                   </div>
                   <p className="text-sm text-gray-600 group-hover:text-white">Express air cargo services for time-sensitive deliveries worldwide.</p>
@@ -114,7 +114,7 @@ export default function FeaturesPlanet() {
                 {/* Box 4 - Warehousing */}
                 <div className="min-w-[250px] bg-white hover:bg-[#1a1147] hover:border-[#1a1147] rounded-lg p-4 shadow-lg border border-gray-200 transition-colors duration-300 group cursor-pointer">
                   <div className="flex items-center gap-2 mb-2">
-                    <PaperAirplaneIcon className="w-6 h-6 text-blue-600 group-hover:text-white" />
+                    <PaperAirplaneIcon className="w-6 h-6 text-green-600 group-hover:text-white" />
                     <h4 className="text-lg font-bold text-gray-900 group-hover:text-white">Urban Air & Ocean Freight</h4>
                   </div>
                   <p className="text-sm text-gray-600 group-hover:text-white">State-of-the-art storage facilities with inventory management.</p>
@@ -123,7 +123,7 @@ export default function FeaturesPlanet() {
                 {/* Box 5 - Custom Clearance */}
                 <div className="min-w-[250px] bg-white hover:bg-[#1a1147] hover:border-[#1a1147] rounded-lg p-4 shadow-lg border border-gray-200 transition-colors duration-300 group cursor-pointer">
                   <div className="flex items-center gap-2 mb-2">
-                    <ArrowPathIcon className="w-6 h-6 text-blue-600 group-hover:text-white" />
+                    <ArrowPathIcon className="w-6 h-6 text-green-600 group-hover:text-white" />
                     <h4 className="text-lg font-bold text-gray-900 group-hover:text-white">Urban Express Import</h4>
                   </div>
                   <p className="text-sm text-gray-600 group-hover:text-white">Seamless customs documentation and clearance services.</p>
@@ -132,7 +132,7 @@ export default function FeaturesPlanet() {
                 {/* Box 6 - Supply Chain */}
                 <div className="min-w-[250px] bg-white hover:bg-[#1a1147] hover:border-[#1a1147] rounded-lg p-4 shadow-lg border border-gray-200 transition-colors duration-300 group cursor-pointer">
                   <div className="flex items-center gap-2 mb-2">
-                    <BuildingOffice2Icon className="w-6 h-6 text-blue-600 group-hover:text-white" />
+                    <BuildingOffice2Icon className="w-6 h-6 text-green-600 group-hover:text-white" />
                     <h4 className="text-lg font-bold text-gray-900 group-hover:text-white">Urban Storage</h4>
                   </div>
                   <p className="text-sm text-gray-600 group-hover:text-white">End-to-end supply chain optimization and management.</p>

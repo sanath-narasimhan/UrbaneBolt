@@ -9,12 +9,12 @@ import {
 export default function Stats() {
   return (
     
-    <section className="relative py-12 md:py-0 bg-[#013046] bg-opacity-75" style={{ minHeight: '50vh', height: 'auto', md: { height: '30vh' }}}>
+    <section className="relative py-0 md:py-0 bg-[#013046] bg-opacity-75 " style={{ minHeight: '50vh', height: 'auto', md: { height: '30vh' }}}>
       
       
      
       
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 h-full pt-16">
+      <div className="mx-auto max-w-6xl px-0 sm:px-6 h-full pt-16 pb-0 mb-0">
       
       
 
