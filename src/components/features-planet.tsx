@@ -77,7 +77,7 @@ export default function FeaturesPlanet() {
                 <div className="min-w-[250px] bg-white hover:bg-[#1a1147] hover:border-[#1a1147] rounded-lg p-4 shadow-lg border border-gray-200 transition-colors duration-300 group cursor-pointer">
                   <div className="flex items-center gap-2 mb-2">
                     <BuildingOffice2Icon className="w-6 h-6 text-blue-600 group-hover:text-white" />
-                    <h4 className="text-lg font-bold text-gray-900 group-hover:text-white">Urban Storage</h4>
+                    <h4 className="text-lg font-bold text-gray-900 group-hover:text-white">Urban Store & Ship</h4>
                   </div>
                   <p className="text-sm text-gray-600 group-hover:text-white">End-to-end supply chain optimization and management.</p>
                 </div>

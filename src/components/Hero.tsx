@@ -20,7 +20,7 @@ export default function Hero() {
   };
 
   return (
-    <div id="home" className="relative min-h-screen bg-white flex items-center"> {/*}4CAF50  1a1147 */}
+    <div id="home" className="relative min-h-screen bg-white flex items-center flex-col">
       <div className="absolute inset-0 bg-white opacity-90"></div>
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
         <div className="grid md:grid-cols-2 gap-12 items-center justify-items-center">
@@ -44,7 +44,7 @@ export default function Hero() {
                   2000,
                   'Electronic Brands',
                   2000,
-                  'Fashon Brands',
+                  'Fashion Brands',
                   2000,
                   'Wellness Brands',
                   2000,
@@ -79,8 +79,13 @@ export default function Hero() {
             />
           </div> 
           {/* Add the new image container */}
-
-          
+          <div className="md:hidden flex justify-center items-center mt-6">
+            <img 
+              src={mapImage}
+              alt="Indian map"
+              className="w-full max-w-[300px] h-auto rounded-3xl shadow-lg transform hover:scale-105 transition-transform duration-300"
+            />
+          </div>
         </div>
       </div>
     </div>

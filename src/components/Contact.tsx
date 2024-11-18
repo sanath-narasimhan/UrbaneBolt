@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Mail, Phone, MapPin } from 'lucide-react';
+import { FaLinkedin, FaFacebook, FaInstagram } from 'react-icons/fa'; // Importing icons
+import { SiX } from 'react-icons/si'; // Importing the X icon
 
 const services = [
   { title: 'Same Day Delivery', value: 'same_day_delivery' },
@@ -36,7 +38,23 @@ export default function Contact() {
                 <span>No 95 6th Cross CIL Layout RT Nagar Post Bangalore Karnataka 560032</span>
               </div>
             </div>
+            {/* Social Media Icons */}
+            <div className="flex justify-center space-x-4 mt-4 pt-10">
+                <a href="https://www.linkedin.com/in/urbanebolt/?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" rel="noopener noreferrer">
+                  <FaLinkedin className="h-6 w-6 text-blue-700 hover:text-blue-500 transition duration-200" />
+                </a>
+                <a href="https://www.facebook.com/profile.php?id=61568470507226" target="_blank" rel="noopener noreferrer">
+                  <FaFacebook className="h-6 w-6 text-blue-600 hover:text-blue-400 transition duration-200" />
+                </a>
+                <a href="https://www.instagram.com/urbanebolt/" target="_blank" rel="noopener noreferrer">
+                  <FaInstagram className="h-6 w-6 text-pink-600 hover:text-pink-400 transition duration-200" />
+                </a>
+                <a href="https://x.com/urbanebolt" target="_blank" rel="noopener noreferrer">
+                  <SiX className="h-6 w-6 text-blue-400 hover:text-blue-300 transition duration-200" />
+                </a>
+            </div>
           </div>
+          
           <div>
             <form className="space-y-4">
               {/* Services Dropdown */}

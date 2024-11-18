@@ -6,6 +6,7 @@ import Features from '../components/Features';
 import Contact from '../components/Contact';
 import FeaturesPlanet from '../components/features-planet';
 import Navbar from '../components/Navbar';
+import Integrations from '../components/Integrations';
 
 import { TruckIcon, CubeIcon, DevicePhoneMobileIcon, ShoppingBagIcon } from '@heroicons/react/24/outline';
 import { Package, Truck, Plane } from 'lucide-react'; // Import icons
@@ -159,7 +160,7 @@ function Home() {
       image: "/carousel/fly.jpg"
     },
     {
-      service: "Urban Storage",
+      service: "Urban Store & Ship",
       description: "A home for your cargo",
       image: "/carousel/warehouse.jpg"
     },
@@ -359,8 +360,10 @@ function Home() {
           </div>
           <div className="relative z-20">
             <Features />
+            <Integrations />
           </div>
-          {/* Our team */}
+
+          {/* Our team 
            <div className="relative z-20">
             <div className="container mx-auto px-4">
               <h2 className="text-5xl font-bold text-center mb-12"> Team <span style={{ color: '#150958' }}>urban</span>
@@ -381,7 +384,9 @@ function Home() {
               ))}
             </div>
           </div> 
-          </div>
+          </div>*/}
+
+    
           
           <div id="contact-section" className="scroll-mt-20 relative z-20">
             <Stats />
