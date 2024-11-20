@@ -1,11 +1,11 @@
 import React from 'react';
-import { Shield, Clock, MapPin, BarChart3 } from 'lucide-react';
+import { Bike , Clock, MapPin, BarChart3 } from 'lucide-react';
 
 const features = [
   {
-    icon: <Shield className="h-6 w-6" />,
-    title: 'Secure Shipping',
-    description: 'End-to-end protection for your valuable shipments with real-time tracking.'
+    icon: <Bike  className="h-6 w-6" />,
+    title: 'Last-Mile Complexity Solution',
+    description: 'Delivery riders will use a user-friendly app with optimized routes, turn-by-turn navigation, and real-time updates, enabling them to focus on their ride and customer interactions.'
   },
   {
     icon: <Clock className="h-6 w-6" />,
@@ -29,7 +29,8 @@ export default function Features() {
     <div className="py-20 bg-white bg-opacity-85">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16 bg-white bg-opacity-20">
-          <h2 className="text-4xl font-bold text-[#1a1147] mb-4 ">Why Choose Us</h2>
+          <h2 className="text-4xl font-bold text-[#1a1147] mb-4 ">Why Choose <span style={{ color: '#150958' }}>urban</span>
+          <span style={{ color: '#40AC49' }}>ebolt</span> </h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
             Experience the future of logistics with our cutting-edge solutions
           </p>

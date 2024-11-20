@@ -6,11 +6,13 @@ import Features from '../components/Features';
 import Contact from '../components/Contact';
 import FeaturesPlanet from '../components/features-planet';
 import Navbar from '../components/Navbar';
-import Integrations from '../components/Integrations';
+import Footer from '../components/Footer';
 
 import { TruckIcon, CubeIcon, DevicePhoneMobileIcon, ShoppingBagIcon } from '@heroicons/react/24/outline';
 import { Package, Truck, Plane } from 'lucide-react'; // Import icons
 import { ArrowRight } from 'lucide-react';
+
+import { Link, useNavigate } from 'react-router-dom';
 
 // Add this interface at the top of the file
 interface TeamMember {
@@ -54,7 +56,6 @@ function Home() {
 
   const trackingOptions = [
     { type: 'shipment', label: 'AWB Number', icon: Package, color: '#F6851F' },
-    { type: 'mobile', label: 'Mobile Number', icon: Truck, color: '#1F9EBC' },
     { type: 'order', label: 'Order Number', icon: Plane, color: '#40AC49' },
   ];
 
@@ -64,12 +65,6 @@ function Home() {
       hoverColor: 'hover:bg-green-600',
       icon: TruckIcon, 
       label: 'AWB Number'
-    },
-    mobile: {
-      color: 'bg-green-600',
-      hoverColor: 'hover:bg-green-600',
-      icon: DevicePhoneMobileIcon, 
-      label: 'Mobile Number'
     },
     order: {
       color: 'bg-green-600',
@@ -83,8 +78,6 @@ function Home() {
     switch(activeTab) {
       case 'shipment':
         return 'Enter AWB number';
-      case 'mobile':
-        return 'Enter mobile number';
       case 'order':
         return 'Enter order number';
       default:
@@ -111,6 +104,8 @@ function Home() {
 
     return () => {
       window.removeEventListener('scroll', handleScroll); // Cleanup event listener on unmount
+
+     
     };
   }, []);
 
@@ -120,6 +115,30 @@ function Home() {
       behavior: 'smooth'
     });
   };
+
+  
+
+  useEffect(() => {
+    const handleHashChange = () => {
+      if (window.location.hash === '#contact') {
+        const contactSection = document.getElementById('contact');
+        if (contactSection) {
+          contactSection.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+    };
+
+    // Listen for hash changes
+    window.addEventListener('hashchange', handleHashChange);
+
+    // Check the initial hash on mount
+    handleHashChange();
+
+    // Cleanup the event listener on unmount
+    return () => {
+      window.removeEventListener('hashchange', handleHashChange);
+    };
+  }, []); // Empty dependency array to run only on mount
 
   // Function to get the border color based on the selected tracking type
   const getBorderColor = (type: 'shipment' | 'container' | 'order') => {
@@ -134,32 +153,32 @@ function Home() {
     {
       service: "Same Day Delivery",
       description: "On time, Every Time",
-      image: "/carousel/sdd.jpg"
+      image: "/Banner/Banner-02.jpg"
     },
     {
       service: "Next Day Delivery",
       description: "Tomrrow's delivery, Today's promise",
-      image: "/carousel/ndd.jpg"
+      image: "/Banner/Banner-03.jpg"
     },
     {
       service: "Urban Cross Border",
       description: "Shop the world, delivered to your door",
-      image: "/carousel/cargoPlane.jpg"
+      image: "/Banner/Banner-01.jpg"
     },
     {
       service: "Urban Air and Ocean Freight",
       description: "Global reach, Local Expertise",
-      image: "/carousel/ship.jpg"
+      image: "/Banner/Banner-05.jpg"
     },
     {
       service: "Urban Express Imports",
       description: "Global Sourcing, Local Delivery",
-      image: "/carousel/fly.jpg"
+      image: "/Banner/Banner-04.jpg"
     },
     {
       service: "Urban Store & Ship",
       description: "A home for your cargo",
-      image: "/carousel/warehouse.jpg"
+      image: "/Banner/Banner-06.jpg"
     },
     
     
@@ -200,15 +219,16 @@ function Home() {
         </div>
       </div>
 
-      {/* Background Banner (stays fixed) */}
-      <div className=" fixed top-0 left-0 w-full h-full z-0">
+      {/* Background Banner (stays fixed)*/}
+      <div className=" fixed top-0 left-0 w-full h-full z-0 overflow-hidden">
         <img 
-          src="logo\\LogoBanner.png" 
+          src="/logo/LogoBanner.jpg" 
           alt="Background Logo"
-          className="w-full  object-cover opacity-45"
+          className="w-full h-full object-cover opacity-45 md:object-center md:scale-150"
+          style={{ objectPosition: 'center' }}
         />
         
-      </div>
+      </div> 
 
       {/* Initial Banner */}
       <div 
@@ -235,7 +255,7 @@ function Home() {
               style={{ 
                 backgroundImage: `url(${slides[currentSlide].image})`, 
                 backgroundSize: 'cover', 
-                backgroundPosition: 'center' 
+                backgroundPosition: window.innerWidth < 640 ? '12% center' : 'center' 
               }}
             />
 
@@ -257,9 +277,9 @@ function Home() {
               </button>
             </div>
 
-            <div className="absolute top-24 md:top-42 left-0 right-0 p-4 text-white bg-white bg-opacity-25">
+            {/*<div className="absolute top-24 md:top-42 left-0 right-0 p-4 text-white bg-white bg-opacity-25">
               <div className="flex flex-col items-center md:items-start md:pl-20 left-40 ">
-                {/* Logo Image */}
+                
                 
                 <img 
                   src="/logo/logoBB.png" // Replace with the actual path to your logo
@@ -276,15 +296,15 @@ function Home() {
                 </p>
                 
               </div>
-            </div>
+            </div>*/}
           </div>
 
              {/* Shipment Tracker */}
-            <div id="tracking" className="absolute bottom-14 md:bottom-10 left-1/2 transform -translate-x-1/2 w-[95%] md:w-[80%] max-w-3xl bg-[#] p-2 md:p-4 rounded-lg z-10">
+            <div id="tracking" className="absolute bottom-14 md:bottom-10 left-1/2 transform -translate-x-1/2 w-[95%] md:w-[70%] max-w-3xl bg-[#] p-2 md:p-4 rounded-lg z-10">
               {/* Header and Tabs */}
               <div className="mb-3 md:mb-4">
-                <div className="flex justify-between md:justify-start md:space-x-1">
-                  {['shipment', 'mobile', 'order'].map((tab) => {
+                <div className="flex justify-between md:justify-start gap-1 md:space-x-1">
+                  {['shipment', 'order'].map((tab) => {
                     const TabIcon = tabConfig[tab].icon;
                     return (
                       <button
@@ -292,7 +312,7 @@ function Home() {
                         onClick={() => setActiveTab(tab)}
                         className={`px-2 md:px-3 py-1 md:py-1.5 rounded-lg font-medium capitalize transition-colors duration-200 flex items-center text-xs md:text-base ${
                           activeTab === tab
-                            ? `${tabConfig[tab].color} text-white`
+                            ? `bg-[#40AC49] text-white`
                             : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                         }`}
                       >
@@ -301,26 +321,29 @@ function Home() {
                       </button>
                     );
                   })}
-                </div>
-              </div>
 
-              {/* Search Input */}
-              <div className="relative flex flex-col sm:flex-row gap-2 sm:gap-0">
+                {/* Search Input */}
                 <input
                   type="text"
                   placeholder={getPlaceholder()}
-                  className="w-full px-3 md:px-4 py-2 md:py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-400 focus:border-transparent outline-none transition-all duration-200 text-sm md:text-base"
+                  className="flex-grow px-1 md:px-4 py-1 md:py-1 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-400 focus:border-transparent outline-none transition-all duration-200 text-sm md:text-base"
+                  
                 />
-                <button 
-                  className={`sm:absolute sm:right-2 sm:top-1/2 sm:transform sm:-translate-y-1/2 
-                             px-3 md:px-4 py-2 md:py-1.5 w-full sm:w-auto
-                             ${tabConfig[activeTab].color} text-white rounded-lg 
-                             ${tabConfig[activeTab].hoverColor} transition-colors duration-200
+                <Link 
+                 to="/tracking"
+                  className={`ml-2 px-1 md:px-1 py-2 md:py-1.5 w-full sm:w-auto
+                             bg-[#40AC49] text-white rounded-lg 
+                             hover:bg-[#007632] transition-colors duration-200
                              text-sm md:text-base`}
                 >
-                  Track Shipment 
-                </button>
+                  Track shipment
+                </Link>
+                  
+                </div>
               </div>
+
+               
+              
             </div>
 
 
@@ -382,11 +405,14 @@ function Home() {
           </div> 
           </div>*/}
 
-    
+          <div className="relative z-20">
+            <Stats />
+          </div>
           
           <div id="contact" className="scroll-mt-20 relative z-20">
-            <Stats />
+            
             <Contact />
+            <Footer />
           </div>
         </div>
       </div>

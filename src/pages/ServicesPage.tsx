@@ -17,6 +17,9 @@ import Stats from '../components/Stats';
 
 import Contact from '../components/Contact';
 
+import Footer from '../components/Footer';
+
+
 export default function Services() {
   const location = useLocation();
   const [activeTab, setActiveTab] = useState(0);
@@ -199,11 +202,12 @@ export default function Services() {
           </div>
         </div>
       </div>
-      
       <div id="contact-section" className="scroll-mt-20 relative z-20">
-            <Stats />
+            
             <Contact />
+            <Footer />
        </div>
     </div>
+    
   );
 }

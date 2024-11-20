@@ -20,8 +20,8 @@ export default function Contact() {
   };
 
   return (
-    <div id="contact" className="bg-[#013046] bg-opacity-75 text-white py-2 pb-3">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-0">
+    <div id="contact" className="bg-[#013046] bg-opacity-75 text-white py-4 pt-14 pb-5">
+      <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 mt-0">
         <div className="grid md:grid-cols-2 gap-12">
           <div>
             <h2 className="text-4xl font-bold mb-6">Get in Touch</h2>

@@ -3,7 +3,7 @@ import { ArrowRight, Package } from 'lucide-react';
 import { TypeAnimation } from 'react-type-animation';
 import tmLogo from '/logo/Logo.png';
 import Image from 'next/image';
-import mapImage from '/logo/IndiaMap.png';  // Adjust path as needed
+import mapImage from '/logo/IndiaMap.jpg';  // Adjust path as needed
 
 export default function Hero() {
   const scrollToSection = (e: React.MouseEvent, sectionId: string) => {
@@ -63,7 +63,7 @@ export default function Hero() {
             </h1>
 
             <p className="text-lg mb-8 text-black mx-auto text-center">
-              Urbanebolt, We deliver speed!
+              UrbaneBolt, We deliver speed!
               <br />
               Launching same day delivery in Bengaluru & Hyderabad.
             </p>
@@ -75,7 +75,7 @@ export default function Hero() {
             <img 
               src={mapImage}
               alt="Indian map"
-              className="w-full max-w-[500px] h-auto rounded-3xl shadow-lg transform hover:scale-105 transition-transform duration-300"
+              className="w-full max-w-[800px] h-auto rounded-3xl shadow-lg transform hover:scale-105 transition-transform duration-300"
             />
           </div> 
           {/* Add the new image container */}

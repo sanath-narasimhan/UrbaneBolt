@@ -40,20 +40,33 @@ export default function Navbar() {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
+  const handleScrollToContact = () => {
+    navigate('/#contact'); // Navigate to the contact section
+    const contactSection = document.getElementById('contact');
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  const handleNavigateHome = () => {
+    navigate('/'); // Navigate to the home page
+    window.scrollTo({ top: 0, behavior: 'smooth' }); // Scroll to the top smoothly
+  };
+
   return (
-    <nav className="w-[98%] mx-auto my-2 bg-[#013046] bg-opacity-75 text-white rounded-2xl shadow-lg">
+    <nav className="w-full mx-auto my-2 bg-white text-white rounded-2xl shadow-lg">
       <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10">
         <div className="flex items-center justify-between h-16">
-          <div className="flex items-center">
-            <div className="flex-shrink-0 flex items-center gap-2">
+          <div className="flex ">
+            <div className="flex-shrink-0 flex left-0 gap-2">
               <Link to="/">
-                <img src={tmLogo} alt="TM Logo" className="h-8 w-27" />
+                <img src={tmLogo} alt="TM Logo" className="h-12 w-27" />
               </Link>
             </div>
           </div>
           <div className="hidden md:block">
             <div className="ml-10 flex items-baseline space-x-4">
-              <Link to="/" className="hover:text-[#4CAF50] px-3 py-2 rounded-md text-sm font-medium">Home</Link>
+              <button onClick={handleNavigateHome} className="text-[#007632] hover:text-[#4CAF50] px-3 py-2 rounded-md text-sm font-medium">Home</button>
               
               {/* Services Dropdown */}
               <div className="relative" ref={dropdownRef}>
@@ -61,7 +74,7 @@ export default function Navbar() {
                   onClick={() => {setShowServicesDropdown(!showServicesDropdown);
                     console.log(`Mobile Services Dropdown: ${showServicesDropdown ? 'Opened' : 'Closed'}`);}
                   }
-                  className="hover:text-[#4CAF50] px-3 py-2 rounded-md text-sm font-medium flex items-center gap-1"
+                  className="text-[#007632] hover:text-[#4CAF50] px-3 py-2 rounded-md text-sm font-medium flex items-center gap-1"
                 >
                   Services
                   <ChevronDown className="h-4 w-4" />
@@ -88,15 +101,15 @@ export default function Navbar() {
                 )}
               </div>
 
-              <Link to="/#about" className="hover:text-[#4CAF50] px-3 py-2 rounded-md text-sm font-medium">About</Link>
-              <Link to="/#contact" className="hover:text-[#4CAF50] px-3 py-2 rounded-md text-sm font-medium">Contact Us</Link>
-              <Link to="/#tracking" className="bg-[#4CAF50] text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-[#F6851F]">Track shipment</Link>
+              <Link to="/about" className="text-[#007632] hover:text-[#4CAF50] px-3 py-2 rounded-md text-sm font-medium">About</Link>
+              <button onClick={handleScrollToContact} className="text-[#007632] hover:text-[#4CAF50] px-3 py-2 rounded-md text-sm font-medium">Contact Us</button>
+              <Link to="/tracking" className="bg-[#4CAF50] text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-[#007632]">Track shipment</Link>
             </div>
           </div>
           
           {/* Mobile menu button */}
           <div className="md:hidden">
-            <button onClick={() => setIsOpen(!isOpen)} className="text-white hover:text-[#4CAF50]">
+            <button onClick={() => setIsOpen(!isOpen)} className="text-[#007632] hover:text-[#4CAF50]">
               {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </button>
           </div>
@@ -107,13 +120,12 @@ export default function Navbar() {
       {isOpen && (
         <div className="md:hidden">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            <Link 
-              to="/" 
-              onClick={() => setIsOpen(false)}
-              className="hover:text-[#4CAF50] block px-3 py-2 rounded-md text-base font-medium"
+            <button 
+              onClick={handleNavigateHome}
+              className="text-[#007632] hover:text-[#4CAF50] block px-3 py-2 rounded-md text-base font-medium"
             >
               Home
-            </Link>
+            </button>
             
             {/* Mobile Services Section */}
             <div className="relative">
@@ -122,14 +134,14 @@ export default function Navbar() {
                   setShowMobileServicesDropdown(!showMobileServicesDropdown);
                   console.log(`Mobile Services Dropdown: ${showMobileServicesDropdown ? 'Opened' : 'Closed'}`);
                 }}
-                className="w-full text-left hover:text-[#4CAF50] block px-3 py-2 rounded-md text-base font-medium flex items-center justify-between"
+                className="w-full text-left text-[#007632] hover:text-[#4CAF50] block px-3 py-2 rounded-md text-base font-medium flex items-center justify-between"
               >
                 Services
                 <ChevronDown className={`h-4 w-4 transform transition-transform duration-200 ${showMobileServicesDropdown ? 'rotate-180' : ''}`} />
               </button>
               
               {showMobileServicesDropdown && (
-                <div className="pl-4 space-y-1 bg-[#013046] rounded-md">
+                <div className="pl-4 space-y-1 bg-white rounded-md">
                   {services.map((service) => (
                     <button
                       key={service.index}
@@ -137,7 +149,7 @@ export default function Navbar() {
                         console.log(`Mobile Service clicked: ${service.title}`);
                         handleServiceClick(service.index);
                       }}
-                      className="w-full text-left hover:text-[#4CAF50] block px-3 py-2 text-sm transition-colors duration-150"
+                      className="w-full text-left text-[#007632] hover:text-[#4CAF50] block px-3 py-2 text-sm transition-colors duration-150"
                     >
                       {service.title}
                     </button>
@@ -147,19 +159,19 @@ export default function Navbar() {
             </div>
 
             <Link 
-              to="/#about" 
+              to="/about" 
               onClick={() => setIsOpen(false)}
-              className="hover:text-[#4CAF50] block px-3 py-2 rounded-md text-base font-medium"
+              className="text-[#007632] hover:text-[#4CAF50] block px-3 py-2 rounded-md text-base font-medium"
             >
               About
             </Link>
-            <Link 
-              to="/#contact" 
-              onClick={() => setIsOpen(false)}
-              className="hover:text-[#4CAF50] block px-3 py-2 rounded-md text-base font-medium"
+            <button 
+              onClick={() => {handleScrollToContact; 
+                setIsOpen(false);}}
+              className="text-[#007632] hover:text-[#4CAF50] block px-3 py-2 rounded-md text-base font-medium"
             >
               Contact Us
-            </Link>
+            </button>
           </div>
         </div>
       )}
