@@ -103,7 +103,7 @@ export default function Navbar() {
 
               <Link to="/about" className="text-[#007632] hover:text-[#4CAF50] px-3 py-2 rounded-md text-sm font-medium">About</Link>
               <button onClick={handleScrollToContact} className="text-[#007632] hover:text-[#4CAF50] px-3 py-2 rounded-md text-sm font-medium">Contact Us</button>
-              <Link to="/tracking" className="bg-[#4CAF50] text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-[#007632]">Track shipment</Link>
+              <Link to="/trackShip" className="bg-[#4CAF50] text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-[#007632]">Track shipment</Link>
             </div>
           </div>
           

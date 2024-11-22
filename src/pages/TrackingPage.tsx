@@ -43,7 +43,7 @@ const TrackingPage = () => {
               placeholder="Type AWB/ Order Number Here..."
               className="border border-gray-300 p-3 rounded w-full md:w-3/4 text-gray-800 focus:ring-2 focus:ring-[#007632] focus:outline-none"
             />
-            <button className="bg-[#007632] text-white px-6 py-3 rounded w-full md:w-auto hover:bg-[#3B0062] transition">
+            <button className="bg-[#007632] text-white px-6 py-3 rounded w-full md:w-auto hover:bg-[#4CAF50] transition">
               Track Shipment
             </button>
           </div>

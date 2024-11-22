@@ -85,5 +85,11 @@ section {
   scrollbar-width: none;  /* Firefox */
 }
 
+.line {
+  width: 60px; /* Adjust width as needed */
+  height: 2px; /* Adjust height as needed */
+  margin: 10 2px; /* Space between icons */
+}
+
 
 

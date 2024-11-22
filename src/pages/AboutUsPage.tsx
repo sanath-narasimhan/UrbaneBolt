@@ -6,7 +6,7 @@ const AboutUsPage = () => {
   return (
     <div className="min-h-screen bg-gray-100">
       {/* Navbar */}
-      <div className="fixed top-0 left-0 w-full z-50 bg-white shadow-md">
+      <div className="fixed top-0 left-0 w-full z-50 ">
         <div className="container mx-auto px-4">
           <Navbar />
         </div>
@@ -34,7 +34,7 @@ const AboutUsPage = () => {
             Who We Are
           </h2>
           <p className="text-gray-700 leading-relaxed mb-6">
-          Our Technology Orchestrates, Our humans deliver your dreams to your doorstep<br/>
+          Our Technology Orchestrates, humans deliver your dreams to your doorstep<br/>
 
             Forget the robots, ditch the drones. We're delivering your orders on the same day, fuelled by the smartest tech and the strongest hearts in your city.<br/>
             <b>Introducing UrbaneBolt:</b><br/> The symphony of tech and human hustle. We don't just automate, we empower. Our tech maestro conducts the orchestra, optimizing routes, predicting demand, and matching deliveries with local heroes: your neighbours, your friends, the people who know your city like the back of their hand.<br/>

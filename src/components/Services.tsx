@@ -5,7 +5,7 @@ import { CircleStackIcon, } from '@heroicons/react/24/solid';
 const services = [
   {
     icon: <Building className="h-8 w-8" />,
-    title: 'Brand Warehouse',
+    title: 'Customer Warehouse',
     description: 'Products are carefully picked from our partner brand warehouses, ensuring quality and authenticity.'
   },
   {
