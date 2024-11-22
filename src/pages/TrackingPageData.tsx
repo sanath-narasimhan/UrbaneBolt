@@ -1,27 +1,96 @@
 import React, { useState, useEffect } from "react";
+import axios from 'axios';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import Navbar from "../components/Navbar";
 import Footer from '../components/Footer';
+import { sampleTrackingData } from '../data/sampleTrackingData';
 
-const TrackingPageWithData = ({ jsonData }: { jsonData: Record<string, any> }) => {
+interface ShipmentData {
+  awb: string;
+  order_number: string;
+  origin: string;
+  destination: string;
+  status_code?: {
+    name: string;
+  };
+  consignee: {
+    name: string;
+  };
+  edd: string;
+  scans?: Array<{
+    id: string;
+    scan_date: string;
+    scan_location: string;
+    status_code?: {
+      name: string;
+    };
+  }>;
+}
+
+const TrackingPageWithData = () => {
   const [isHistoryVisible, setIsHistoryVisible] = useState(true);
-  const [shipmentData, setShipmentData] = useState(null);
+  const [shipmentData, setShipmentData] = useState<ShipmentData | null>(null);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const [trackingInput, setTrackingInput] = useState('');
 
   useEffect(() => {
-    // Assuming jsonData is the response object
-    if (jsonData && jsonData.data && jsonData.data.length > 0) {
-      setShipmentData(jsonData.data[0]); // Get the first shipment data
-    }
-  }, [jsonData]);
+    const fetchData = async () => {
+      const queryParams = new URLSearchParams(location.search);
+      const awb = queryParams.get('awb');
+
+      if (awb) {
+        try {
+          const response = await axios.get(
+            `http://erpapi.urbanbolt.in/api/v1/services/track/?awb=${awb}`,
+            {
+              headers: {
+                'Authorization': 'Bearer dFjrZIVbapXpiX6CAGcfRhvqBkCRTO',
+                'Content-Type': 'application/json',
+              }
+            }
+          );
+
+          console.log('API response', response);
+
+          if (response.data.status === 'Success') {
+            setShipmentData(response.data.data[0]);
+          } else {
+            toast.error(`API Error: ${response.data.status}`);
+            setShipmentData(sampleTrackingData.data[0]);
+          }
+        } catch (error) {
+          toast.error(`Error fetching tracking data: ${error.message}`);
+          setShipmentData(sampleTrackingData.data[0]);
+        }
+      } else {
+        setShipmentData(sampleTrackingData.data[0]);
+      }
+    };
+
+    fetchData();
+  }, [location.search]);
+
+  useEffect(() => {
+    console.log('Updated shipment data:', shipmentData);
+  }, [shipmentData]);
 
   const toggleHistory = () => {
     setIsHistoryVisible(!isHistoryVisible);
   };
 
-  // Define the isGreen function outside of the JSX
   const isGreen = (status: string) => {
-    if (!shipmentData || !shipmentData.status_code) return false; // Check if shipmentData is null
-    const statuses = ['Delivered', 'Out For Delivery', 'Intransit', 'Processing', 'Shipped'];
-    return statuses.indexOf(status) >= statuses.indexOf(shipmentData.status_code.name);
+    if (!shipmentData?.status_code?.name) return false;
+    const statuses = ['Shipped', 'Processing', 'Intransit', 'Out For Delivery', 'Delivered'];
+    return statuses.indexOf(status) <= statuses.indexOf(shipmentData.status_code.name);
+  };
+
+  const handleTrack = () => {
+    const awbToTrack = trackingInput.trim();
+    if (awbToTrack) {
+      navigate(`/trackShip?awb=${encodeURIComponent(awbToTrack)}`);
+    }
   };
 
   return (
@@ -51,27 +120,39 @@ const TrackingPageWithData = ({ jsonData }: { jsonData: Record<string, any> }) =
       <div className="container mx-auto p-4 mt-4 max-w-4xl">
         {/* Tracking Input Section */}
         <div className="bg-white rounded-lg shadow-lg p-6">
-        {shipmentData ? (<div className="flex flex-col md:flex-row items-center gap-4">
-            <input
-              type="text"
-              placeholder={shipmentData.awb}
-              className="border border-gray-300 p-3 rounded w-full md:w-3/4 text-gray-800 focus:ring-2 focus:ring-[#007632] focus:outline-none"
-            />
-            <button className="bg-[#007632] text-white px-6 py-3 rounded w-full md:w-auto hover:bg-[#4CAF50] transition">
-              Track Shipment
-            </button>
-          </div>): (
-          <div className="flex flex-col md:flex-row items-center gap-4">
-          <input
-            type="text"
-            placeholder="Type AWB/ Order Number Here..."
-            className="border border-gray-300 p-3 rounded w-full md:w-3/4 text-gray-800 focus:ring-2 focus:ring-[#007632] focus:outline-none"
-          />
-          <button className="bg-[#007632] text-white px-6 py-3 rounded w-full md:w-auto hover:bg-[#4CAF50] transition">
-            Track Shipment
-          </button>
-        </div>
-        )}
+          {shipmentData ? (
+            <div className="flex flex-col md:flex-row items-center gap-4">
+              <input
+                type="text"
+                value={trackingInput}
+                onChange={(e) => setTrackingInput(e.target.value)}
+                placeholder={shipmentData.awb}
+                className="border border-gray-300 p-3 rounded w-full md:w-3/4 text-gray-800 focus:ring-2 focus:ring-[#007632] focus:outline-none"
+              />
+              <button 
+                onClick={handleTrack}
+                className="bg-[#007632] text-white px-6 py-3 rounded w-full md:w-auto hover:bg-[#4CAF50] transition"
+              >
+                Track Shipment
+              </button>
+            </div>
+          ) : (
+            <div className="flex flex-col md:flex-row items-center gap-4">
+              <input
+                type="text"
+                value={trackingInput}
+                onChange={(e) => setTrackingInput(e.target.value)}
+                placeholder="Type AWB/ Order Number Here..."
+                className="border border-gray-300 p-3 rounded w-full md:w-3/4 text-gray-800 focus:ring-2 focus:ring-[#007632] focus:outline-none"
+              />
+              <button 
+                onClick={handleTrack}
+                className="bg-[#007632] text-white px-6 py-3 rounded w-full md:w-auto hover:bg-[#4CAF50] transition"
+              >
+                Track Shipment
+              </button>
+            </div>
+          )}
         </div>
         
         {/* Shipment Details Section */}
@@ -93,7 +174,9 @@ const TrackingPageWithData = ({ jsonData }: { jsonData: Record<string, any> }) =
                 </div>
                 <div>
                   <span className="text-gray-600">Status:</span>
-                  <span className="ml-2 text-red-500 font-semibold">{shipmentData.status_code.name}</span>
+                  <span className="ml-2 text-red-500 font-semibold">
+                    {shipmentData?.status_code?.name || 'Unknown'}
+                  </span>
                 </div>
               </div>
               <div className="space-y-4">
@@ -125,7 +208,9 @@ const TrackingPageWithData = ({ jsonData }: { jsonData: Record<string, any> }) =
           <div className="flex justify-between items-center flex-wrap gap-4">
             {/* Shipped Status */}
             <div className="flex flex-col items-center">
-              <div className={`w-12 h-12 rounded-full flex items-center justify-center ${isGreen('Shipped') ? 'bg-[#007632]' : 'bg-gray-400'}`}>
+              <div className={`w-12 h-12 rounded-full flex items-center justify-center ${
+                shipmentData?.status_code?.name && isGreen('Shipped') ? 'bg-[#007632]' : 'bg-gray-400'
+              }`}>
                 {/* SVG for Shipped */}
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
@@ -133,11 +218,15 @@ const TrackingPageWithData = ({ jsonData }: { jsonData: Record<string, any> }) =
               </div>
               <span className="text-sm mt-2 text-center">Shipped</span>
             </div>
-            <div className={`line ${isGreen('Shipped') ? 'bg-[#007632]' : 'bg-gray-400'}`} />
+            <div className={`line ${
+              shipmentData?.status_code?.name && isGreen('Shipped') ? 'bg-[#007632]' : 'bg-gray-400'
+            }`} />
 
             {/* Processing Status */}
             <div className="flex flex-col items-center">
-              <div className={`w-12 h-12 rounded-full flex items-center justify-center ${isGreen('Processing') ? 'bg-[#007632]' : 'bg-gray-400'}`}>
+              <div className={`w-12 h-12 rounded-full flex items-center justify-center ${
+                shipmentData?.status_code?.name && isGreen('Processing') ? 'bg-[#007632]' : 'bg-gray-400'
+              }`}>
                 {/* SVG for Processing */}
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
@@ -145,11 +234,15 @@ const TrackingPageWithData = ({ jsonData }: { jsonData: Record<string, any> }) =
               </div>
               <span className="text-sm mt-2 text-center">Processing</span>
             </div>
-            <div className={`line ${isGreen('Processing') ? 'bg-[#007632]' : 'bg-gray-400'}`} />
+            <div className={`line ${
+              shipmentData?.status_code?.name && isGreen('Processing') ? 'bg-[#007632]' : 'bg-gray-400'
+            }`} />
 
             {/* Intransit Status */}
             <div className="flex flex-col items-center">
-              <div className={`w-12 h-12 rounded-full flex items-center justify-center ${isGreen('Intransit') ? 'bg-[#007632]' : 'bg-gray-400'}`}>
+              <div className={`w-12 h-12 rounded-full flex items-center justify-center ${
+                shipmentData?.status_code?.name && isGreen('Intransit') ? 'bg-[#007632]' : 'bg-gray-400'
+              }`}>
                 {/* SVG for Intransit */}
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
@@ -157,11 +250,15 @@ const TrackingPageWithData = ({ jsonData }: { jsonData: Record<string, any> }) =
               </div>
               <span className="text-sm mt-2 text-center">Intransit</span>
             </div>
-            <div className={`line ${isGreen('Intransit') ? 'bg-[#007632]' : 'bg-gray-400'}`} />
+            <div className={`line ${
+              shipmentData?.status_code?.name && isGreen('Intransit') ? 'bg-[#007632]' : 'bg-gray-400'
+            }`} />
 
             {/* Out For Delivery Status */}
             <div className="flex flex-col items-center">
-              <div className={`w-12 h-12 rounded-full flex items-center justify-center ${isGreen('Out For Delivery') ? 'bg-[#007632]' : 'bg-gray-400'}`}>
+              <div className={`w-12 h-12 rounded-full flex items-center justify-center ${
+                shipmentData?.status_code?.name && isGreen('Out For Delivery') ? 'bg-[#007632]' : 'bg-gray-400'
+              }`}>
                 {/* SVG for Out For Delivery */}
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
@@ -169,7 +266,9 @@ const TrackingPageWithData = ({ jsonData }: { jsonData: Record<string, any> }) =
               </div>
               <span className="text-sm mt-2 text-center">Out For Delivery</span>
             </div>
-            <div className={`line ${isGreen('Out For Delivery') ? 'bg-[#007632]' : 'bg-gray-400'}`} />
+            <div className={`line ${
+              shipmentData?.status_code?.name && isGreen('Out For Delivery') ? 'bg-[#007632]' : 'bg-gray-400'
+            }`} />
 
             {/* Delivered Status */}
             <div className="flex flex-col items-center">
@@ -214,18 +313,29 @@ const TrackingPageWithData = ({ jsonData }: { jsonData: Record<string, any> }) =
                     </tr>
                   </thead>
                   <tbody className="divide-y">
-                    {shipmentData.scans.map((entry, index) => (
-                      <tr key={entry.id} className={`relative ${index < shipmentData.scans.length - 1 ? 'border-b' : ''}`}>
-                        <td className="py-3 px-4">{new Date(entry.scan_date).toLocaleString()}</td>
-                        <td className="py-3 px-4">
-                          <div className={`flex items-center ${entry.status_code.name === 'Delivered' ? 'text-green-500' : 'text-gray-600'}`}>
-                            <div className={`w-3 h-3 rounded-full mr-2 ${entry.status_code.name === 'Delivered' ? 'bg-green-500' : 'bg-gray-400'}`}></div>
-                            {entry.status_code.name}
-                          </div>
-                        </td>
-                        <td className="py-3 px-4">{entry.scan_location}</td>
-                      </tr>
-                    ))}
+                    {shipmentData.scans.map((entry, index) => {
+                      const isTopRecord = index === 0;
+                      const isFailed = entry?.status_code?.name?.toLowerCase().includes('fail');
+                      const statusColor = isTopRecord 
+                        ? (isFailed ? 'text-orange-500' : 'text-green-500')
+                        : (entry?.status_code?.name === 'Delivered' ? 'text-green-500' : 'text-gray-600');
+                      const dotColor = isTopRecord 
+                        ? (isFailed ? 'bg-orange-500' : 'bg-green-500')
+                        : (entry?.status_code?.name === 'Delivered' ? 'bg-green-500' : 'bg-gray-400');
+
+                      return (
+                        <tr key={entry.id} className={`relative ${index < shipmentData.scans.length - 1 ? 'border-b' : ''}`}>
+                          <td className="py-3 px-4">{new Date(entry.scan_date).toLocaleString()}</td>
+                          <td className="py-3 px-4">
+                            <div className={`flex items-center ${statusColor}`}>
+                              <div className={`w-3 h-3 rounded-full mr-2 ${dotColor}`}></div>
+                              {entry?.status_code?.name || 'Unknown'}
+                            </div>
+                          </td>
+                          <td className="py-3 px-4">{entry.scan_location}</td>
+                        </tr>
+                      );
+                    })}
                   </tbody>
                 </table>
               </div>

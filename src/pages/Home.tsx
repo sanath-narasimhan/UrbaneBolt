@@ -32,6 +32,8 @@ function Home() {
   const [trackingNumber, setTrackingNumber] = useState('');
   const [trackingType, setTrackingType] = useState<'shipment' | 'container' | 'order'>('shipment');
   const [activeTab, setActiveTab] = useState('shipment');
+  const [trackingInput, setTrackingInput] = useState('');
+  const navigate = useNavigate();
 
   const teamMembers: TeamMember[] = [
     {
@@ -300,50 +302,57 @@ function Home() {
           </div>
 
              {/* Shipment Tracker */}
-            <div id="tracking" className="absolute bottom-14 md:bottom-10 left-1/2 transform -translate-x-1/2 w-[95%] md:w-[70%] max-w-3xl bg-[#] p-2 md:p-4 rounded-lg z-10">
+            <div id="tracking" className="absolute bottom-14 md:bottom-10 left-1/2 transform -translate-x-1/2 w-[90%] md:w-[70%] max-w-3xl bg-[#] p-2 md:p-4 rounded-lg z-10">
               {/* Header and Tabs */}
               <div className="mb-3 md:mb-4">
-                <div className="flex justify-between md:justify-start gap-1 md:space-x-1">
-                  {['shipment', 'order'].map((tab) => {
-                    const TabIcon = tabConfig[tab].icon;
-                    return (
-                      <button
-                        key={tab}
-                        onClick={() => setActiveTab(tab)}
-                        className={`px-2 md:px-3 py-1 md:py-1.5 rounded-lg font-medium capitalize transition-colors duration-200 flex items-center text-xs md:text-base ${
-                          activeTab === tab
-                            ? `bg-[#40AC49] text-white`
-                            : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-                        }`}
-                      >
-                        <TabIcon className="h-3 w-3 md:h-4 md:w-4 hidden md:inline" />
-                        <span className="ml-1">{tabConfig[tab].label}</span>
-                      </button>
-                    );
-                  })}
+                <div className="flex flex-col sm:flex-row gap-2">
+                  {/* Tabs */}
+                  <div className="flex gap-1">
+                    {['shipment', 'order'].map((tab) => {
+                      const TabIcon = tabConfig[tab].icon;
+                      return (
+                        <button
+                          key={tab}
+                          onClick={() => setActiveTab(tab)}
+                          className={`px-2 md:px-3 py-1 md:py-1.5 rounded-lg font-medium capitalize transition-colors duration-200 flex items-center text-xs md:text-base ${
+                            activeTab === tab
+                              ? `bg-[#40AC49] text-white`
+                              : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                          }`}
+                        >
+                          <TabIcon className="h-3 w-3 md:h-4 md:w-4 hidden md:inline" />
+                          <span className="ml-1">{tabConfig[tab].label}</span>
+                        </button>
+                      );
+                    })}
+                  </div>
 
-                {/* Search Input */}
-                <input
-                  type="text"
-                  placeholder={getPlaceholder()}
-                  className="flex-grow px-1 md:px-4 py-1 md:py-1 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-400 focus:border-transparent outline-none transition-all duration-200 text-sm md:text-base"
-                  
-                />
-                <Link 
-                 to="/tracking"
-                  className={`ml-2 px-1 md:px-1 py-2 md:py-1.5 w-full sm:w-auto
-                             bg-[#40AC49] text-white rounded-lg 
-                             hover:bg-[#007632] transition-colors duration-200
-                             text-sm md:text-base`}
-                >
-                  Track shipment
-                </Link>
-                  
+                  {/* Search Input and Button */}
+                  <div className="flex flex-1 gap-2">
+                    <input
+                      type="text"
+                      value={trackingInput}
+                      onChange={(e) => setTrackingInput(e.target.value)}
+                      placeholder={getPlaceholder()}
+                      className="flex-1 min-w-0 px-2 md:px-4 py-1 md:py-1 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-400 focus:border-transparent outline-none transition-all duration-200 text-sm md:text-base"
+                    />
+                    <button 
+                      onClick={() => {
+                        if (trackingInput.trim()) {
+                          navigate(`/trackShip?awb=${encodeURIComponent(trackingInput.trim())}`);
+                        }
+                      }}
+                      className="px-2 md:px-4 py-1 md:py-1.5 
+                                bg-[#40AC49] text-white rounded-lg 
+                                hover:bg-[#007632] transition-colors duration-200
+                                text-sm md:text-base whitespace-nowrap
+                                flex items-center justify-center"
+                    >
+                      Track shipment
+                    </button>
+                  </div>
                 </div>
               </div>
-
-               
-              
             </div>
 
 
